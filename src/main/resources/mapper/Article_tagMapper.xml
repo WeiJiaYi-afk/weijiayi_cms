@@ -21,6 +21,7 @@
 			(#{aid},#{tid})
      	</insert>
      	
+     	
      	<!-- 修改 -->
      	<update id="update">
      		UPDATE cms_article_tag
