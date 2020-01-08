@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+     
+   <mapper namespace="com.wjy.dao.ChannelDao">
+   
+   		<!-- 查询 -->
+     	<select id="selects" resultType="Article">
+     		SELECT * FROM cms_channel
+     	</select>
+     	
+     	<!-- 根据id查询-->
+     	<select id="selectById" resultType="Article">
+     		SELECT * FROM cms_channel WHERE id=#{id}
+     	</select>
+
+     	<!-- 添加 -->
+     	<insert id="insert">
+     		INSERT INTO cms_channel(name,description,icon,sorted)VALUES 
+			(#{name},#{description},#{icon},#{sorted})
+     	</insert>
+     	
+     	<!-- 修改 -->
+     	<update id="update">
+     		UPDATE cms_channel
+ 			SET name=#{name},description=#{description},icon=#{icon},sorted=#{sorted} 
+			WHERE id=#{id}
+     	</update>
+     	
+     	<!-- 删除 -->
+     	<delete id="delete">
+     		DELETE FROM cms_channel WHERE id in(${ids})
+     	</delete>
+   
+   
+   </mapper>
