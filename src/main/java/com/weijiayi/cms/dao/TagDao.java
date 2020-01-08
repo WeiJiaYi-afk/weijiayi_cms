@@ -1,6 +1,6 @@
-package com.wjy.dao;
+package com.weijiayi.cms.dao;
 
-import com.wjy.pojo.Tag;
+import com.weijiayi.cms.pojo.Tag;
 
 public interface TagDao extends BaseDao<Tag>{
 

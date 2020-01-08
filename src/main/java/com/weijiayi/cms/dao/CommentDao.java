@@ -1,6 +1,6 @@
-package com.wjy.dao;
+package com.weijiayi.cms.dao;
 
-import com.wjy.pojo.Comment;
+import com.weijiayi.cms.pojo.Comment;
 
 public interface CommentDao extends BaseDao<Comment>{
 

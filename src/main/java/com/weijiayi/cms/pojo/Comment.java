@@ -1,4 +1,4 @@
-package com.wjy.pojo;
+package com.weijiayi.cms.pojo;
 
 public class Comment {
 

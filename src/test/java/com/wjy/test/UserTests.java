@@ -10,8 +10,8 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.wjy.dao.UserDao;
-import com.wjy.pojo.User;
+import com.weijiayi.cms.dao.UserDao;
+import com.weijiayi.cms.pojo.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-beans.xml")

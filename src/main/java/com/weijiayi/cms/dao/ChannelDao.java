@@ -1,6 +1,6 @@
-package com.wjy.dao;
+package com.weijiayi.cms.dao;
 
-import com.wjy.pojo.Channel;
+import com.weijiayi.cms.pojo.Channel;
 
 public interface ChannelDao extends BaseDao<Channel>{
 

@@ -1,6 +1,6 @@
-package com.wjy.dao;
+package com.weijiayi.cms.dao;
 
-import com.wjy.pojo.Collect;
+import com.weijiayi.cms.pojo.Collect;
 
 public interface CollectDao extends BaseDao<Collect>{
 

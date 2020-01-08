@@ -1,8 +1,8 @@
-package com.wjy.service.impl;
+package com.weijiayi.cms.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.wjy.service.UserService;
+import com.weijiayi.cms.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService{

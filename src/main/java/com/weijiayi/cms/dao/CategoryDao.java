@@ -1,6 +1,6 @@
-package com.wjy.dao;
+package com.weijiayi.cms.dao;
 
-import com.wjy.pojo.Category;
+import com.weijiayi.cms.pojo.Category;
 
 public interface CategoryDao extends BaseDao<Category>{
 

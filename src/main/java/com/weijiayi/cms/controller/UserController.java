@@ -1,4 +1,4 @@
-package com.wjy.controller;
+package com.weijiayi.cms.controller;
 
 import org.springframework.stereotype.Controller;
 

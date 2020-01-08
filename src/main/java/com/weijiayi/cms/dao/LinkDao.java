@@ -1,6 +1,6 @@
-package com.wjy.dao;
+package com.weijiayi.cms.dao;
 
-import com.wjy.pojo.Link;
+import com.weijiayi.cms.pojo.Link;
 
 public interface LinkDao extends BaseDao<Link>{
 

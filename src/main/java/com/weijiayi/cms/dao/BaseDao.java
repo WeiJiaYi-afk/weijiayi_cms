@@ -1,10 +1,10 @@
-package com.wjy.dao;
+package com.weijiayi.cms.dao;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.wjy.pojo.User;
+import com.weijiayi.cms.pojo.User;
 
 public interface BaseDao<T>{
 

@@ -1,6 +1,6 @@
-package com.wjy.dao;
+package com.weijiayi.cms.dao;
 
-import com.wjy.pojo.User;
+import com.weijiayi.cms.pojo.User;
 
 public interface UserDao extends BaseDao<User>{
 
