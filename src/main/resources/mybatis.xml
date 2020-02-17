@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 <!-- 别名配置 -->
  <typeAliases>
-   <package name="com.wjy.pojo"/>
+   <package name="com.weijiayi.cms.pojo"/>
  </typeAliases>
  
  <!-- 配置分页助手拦截器 -->

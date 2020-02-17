@@ -6,10 +6,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+	
 	<context:property-placeholder location="classpath:cms.properties"/>
 	<!-- 扫描器 -->
 	<context:component-scan
-		base-package="com.zhangguoming.maven.web.controller"></context:component-scan>
+		base-package="com.weijiayi.cms.controller"></context:component-scan>
 	<!-- 视图解析图 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -19,14 +20,47 @@
 		<property name="suffix" value=".jsp"></property>
 	</bean>
 
-	<!-- 不拦截静态资源 -->
+	<!-- 不拦截静态资源 css,js,jpg-->
 	<mvc:default-servlet-handler />
-	<!-- mvc注解驱动 -->
+	<!-- 开启mvc注解驱动 -->
 	<mvc:annotation-driven />
 	
 	<!-- 文件上传的处理类 -->
-	<bean id="multipartResolver"
+	<!--  <bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+	-->	
 
-
+	<!-- 配置文件上传 id="multipartResolver" id值是固定不变的，不可修改 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- maxUploadSize 限制总文件上传大小 50M -->
+		<property name="maxUploadSize" value="50550249"></property>
+		<!-- maxUploadSizePerFile 限制每个文件的大小 -->
+		<property name="maxUploadSizePerFile" value="8550249"></property>
+		<!--defaultEncoding 防止文件名中文乱码 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/admin/**"/>
+			<mvc:exclude-mapping path="/user/login"/>
+			<mvc:exclude-mapping path="/user/register"/>
+			<mvc:exclude-mapping path="/user/signOut"/>
+			<mvc:exclude-mapping path="/"/>
+			<mvc:exclude-mapping path="/**/*.html"/>
+			<mvc:exclude-mapping path="/public/**"/>
+			<mvc:exclude-mapping path="/comment/**"/>
+			<mvc:exclude-mapping path="/link/links"/>
+			<bean class="com.weijiayi.cms.common.UserAuthInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**"/>
+			<mvc:exclude-mapping path="/admin/"/>
+			<mvc:exclude-mapping path="/admin/login"/>
+			<mvc:exclude-mapping path="/admin/signOut"/>
+			<mvc:exclude-mapping path="/admin/link/links"/>
+			<bean class="com.weijiayi.cms.common.UserAdminAuthInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

@@ -25,5 +25,11 @@ public class Tag {
 		this.tagname = tagname;
 	}
 
+	public Tag(Integer id, String tagname) {
+		super();
+		this.id = id;
+		this.tagname = tagname;
+	}
+
 	
 }

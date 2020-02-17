@@ -12,6 +12,8 @@ public class Comment {
 	private String content;
 	/** 评论时间 **/
 	private String created;
+	//用户姓名
+	private String cname;
 	
 	@Override
 	public String toString() {
@@ -19,6 +21,18 @@ public class Comment {
 				+ ", created=" + created + "]";
 	}
 	
+	public Comment() {
+		// TODO Auto-generated constructor stub
+	}
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -49,6 +63,7 @@ public class Comment {
 	public void setCreated(String created) {
 		this.created = created;
 	}
+
 
 	
 }

@@ -3,6 +3,11 @@ package com.weijiayi.cms.pojo;
 import java.util.Date;
 
 public class User {
+	
+/** ----------------扩展属性----------------- **/
+	
+	/** 扩展属性 **/
+	private String rePassword;
 
 	private Integer id;
 	/** 登录名称 **/
@@ -26,9 +31,9 @@ public class User {
 	/** 个人博客网址 **/
 	private String url;
 	/** 创建时间 **/
-	private String create_time;
+	private Date create_time;
 	/** 修改时间 **/
-	private String update_time;
+	private Date update_time;
 	
 	@Override
 	public String toString() {
@@ -38,6 +43,8 @@ public class User {
 				+ ", update_time=" + update_time + "]";
 	}
 	
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -104,17 +111,23 @@ public class User {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public String getCreate_time() {
+	public Date getCreate_time() {
 		return create_time;
 	}
-	public void setCreate_time(String create_time) {
+	public void setCreate_time(Date create_time) {
 		this.create_time = create_time;
 	}
-	public String getUpdate_time() {
+	public Date getUpdate_time() {
 		return update_time;
 	}
-	public void setUpdate_time(String update_time) {
+	public void setUpdate_time(Date update_time) {
 		this.update_time = update_time;
+	}
+	public String getRePassword() {
+		return rePassword;
+	}
+	public void setRePassword(String rePassword) {
+		this.rePassword = rePassword;
 	}
 	
 }

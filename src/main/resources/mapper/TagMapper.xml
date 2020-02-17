@@ -2,36 +2,32 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-     
-     <mapper namespace="com.wjy.dao.TagDao">
-     
-     	<!-- 查询 -->
-     	<select id="selects" resultType="Article">
-     		SELECT * FROM cms_tag
-     	</select>
-     	
-     	<!-- 根据id查询-->
-     	<select id="selectById" resultType="Article">
-     		SELECT * FROM cms_tag WHERE id=#{id}
-     	</select>
+<mapper namespace="com.weijiayi.cms.dao.TagDao">
+	<select id="selects" resultType="Tag">
+		SELECT * FROM cms_tag
 
-     	<!-- 添加 -->
-     	<insert id="insert">
-			INSERT INTO cms_tag(tagname)VALUES 
-			(#{tagname})
-     	</insert>
-     	
-     	<!-- 修改 -->
-     	<update id="update">
-			UPDATE cms_tag
-			 SET tagname=#{tagname} 
-			WHERE id=#{id}
-     	</update>
-     	
-     	<!-- 删除 -->
-     	<delete id="delete">
-     		DELETE FROM cms_tag WHERE id in(${ids})
-     	</delete>
-     
-     
-     </mapper>
+	</select>
+
+	<select id="selectById" resultType="Tag">
+		SELECT * FROM cms_tag WHERE id=#{id}
+
+	</select>
+
+	<update id="update">
+		UPDATE cms_tag
+		SET tagname=#{tagname}
+		WHERE id=#{id}
+
+	</update>
+
+	<insert id="insert">
+		INSERT INTO cms_tag(tagname)VALUES
+		(#{tagname})
+
+	</insert>
+
+	<delete id="delete">
+		DELETE FROM cms_tag WHERE id in(${ids})
+	</delete>
+
+</mapper>

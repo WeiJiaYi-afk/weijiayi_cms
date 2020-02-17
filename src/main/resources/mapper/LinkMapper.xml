@@ -2,35 +2,28 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-     
-     <mapper namespace="com.wjy.dao.LinkDao">
-     
-     	<!-- 查询 -->
-     	<select id="selects" resultType="Article">
-     		SELECT * FROM cms_link
-     	</select>
-     	
-     	<!-- 根据id查询-->
-     	<select id="selectById" resultType="Article">
-     		SELECT * FROM cms_link WHERE id=#{id}
-     	</select>
+<mapper namespace="com.weijiayi.cms.dao.LinkDao">
+	<select id="selects" resultType="Link">
+		SELECT * FROM cms_link
+	</select>
 
-     	<!-- 添加 -->
-     	<insert id="insert">
-			INSERT INTO cms_link(text,url,created)VALUES 
-			(#{text},#{url},#{created})
-     	</insert>
-     	
-     	<!-- 修改 -->
-     	<update id="update">
-			UPDATE cms_link
-			 SET text=#{text},url=#{url},created=#{created} 
-			WHERE id=#{id}
-     	</update>
-     	
-     	<!-- 删除 -->
-     	<delete id="delete">
-     		DELETE FROM cms_link WHERE id in(${ids})
-     	</delete>
-     	
-     </mapper>
+	<select id="selectById" resultType="Link">
+		SELECT * FROM cms_link WHERE id=#{id}
+	</select>
+
+	<update id="update">
+		UPDATE cms_link
+		SET text=#{text},url=#{url},created=#{created}
+		WHERE id=#{id}
+	</update>
+
+	<insert id="insert">
+		INSERT INTO cms_link(text,url,created)VALUES
+		(#{text},#{url},#{created})
+	</insert>
+
+	<delete id="delete">
+		DELETE FROM cms_link WHERE id in(${ids})
+	</delete>
+
+</mapper>

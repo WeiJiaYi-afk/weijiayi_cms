@@ -22,7 +22,6 @@ public class UserTests {
 	
 	@Test
 	public void test() {
-		
 		//查询
 		List<User> userList = userDao.selects(null);
 		System.out.println(userList);
@@ -32,6 +31,7 @@ public class UserTests {
 		for (User user : selects) {
 			System.out.println(user);
 		}
+		
 		
 		//根据id查询
 		User selectById = userDao.selectById(201);

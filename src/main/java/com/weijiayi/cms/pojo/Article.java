@@ -1,7 +1,19 @@
 package com.weijiayi.cms.pojo;
 
+import java.util.Date;
+
 public class Article {
 
+	/** 所属栏目 **/
+	private String channel_name;
+	/** 所属分类 **/
+	private String category_name;
+	/** 用户昵称 **/
+	private String nickname;
+	
+	private String statusStr;
+	
+	
 	/**  **/
 	private Integer id;
 	/** 标题 **/
@@ -25,19 +37,46 @@ public class Article {
 	/** 0:正常,1:删除 **/
 	private Integer deleted;
 	/** 发布时间 **/
-	private String created;
+	private Date created;
 	/** 更新时间 **/
-	private String updated;
+	private Date updated;
 	/** 评论数量 **/
 	private Integer commentCnt;
 	/** 投诉次数 **/
 	private Integer tousuCnt;
+	
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", content=" + content + ", picture=" + picture
 				+ ", channel_id=" + channel_id + ", category_id=" + category_id + ", user_id=" + user_id + ", hits="
 				+ hits + ", hot=" + hot + ", status=" + status + ", deleted=" + deleted + ", created=" + created
 				+ ", updated=" + updated + ", commentCnt=" + commentCnt + ", tousuCnt=" + tousuCnt + "]";
+	}
+	
+	
+	public String getChannel_name() {
+		return channel_name;
+	}
+	public void setChannel_name(String channel_name) {
+		this.channel_name = channel_name;
+	}
+	public String getCategory_name() {
+		return category_name;
+	}
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getStatusStr() {
+		return statusStr;
+	}
+	public void setStatusStr(String statusStr) {
+		this.statusStr = statusStr;
 	}
 	public Integer getId() {
 		return id;
@@ -105,16 +144,16 @@ public class Article {
 	public void setDeleted(Integer deleted) {
 		this.deleted = deleted;
 	}
-	public String getCreated() {
+	public Date getCreated() {
 		return created;
 	}
-	public void setCreated(String created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
-	public String getUpdated() {
+	public Date getUpdated() {
 		return updated;
 	}
-	public void setUpdated(String updated) {
+	public void setUpdated(Date updated) {
 		this.updated = updated;
 	}
 	public Integer getCommentCnt() {
