@@ -159,6 +159,7 @@ public class ArticleServiceImpl implements ArticleService{
 		articleDao.update(article);
 	}
 
+	//最新文章
 	@Override
 	public List<Article> getNewList(Integer pageSize) {
 		PageHelper.startPage(1, pageSize);
@@ -187,6 +188,15 @@ public class ArticleServiceImpl implements ArticleService{
 			System.out.println("查找到的"+article);
 		}
 		return list;
+	}
+
+	//查找最新图片
+	@Override
+	public List<Article> getNewImage(Integer pageSize) {
+		PageHelper.startPage(1, pageSize);
+		Article article = new Article();
+		article.setStatus(1);
+		return articleDao.selects(article);
 	}
 
 }

@@ -16,4 +16,8 @@ public interface ArticleDao extends BaseDao<Article>{
 	List<Article> gethotselect();
 	@Select("select * from cms_article where title=#{text}")
 	Article selectctId(String text);
+	//最新图片
+	@Select("select * from cms_article where  ORDER BY created desc")
+	List<Article> getNewImage();
+	
 }

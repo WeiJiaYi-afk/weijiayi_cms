@@ -98,6 +98,18 @@
 						</c:forEach>
 					</ul>
 				</div>
+				<div class="right">
+					<div>最新图片</div>
+					<ul class="list-unstyled">
+						<c:forEach items="${newAritcleImage}" var="item">
+						<li class="media">
+							<a href="/article/detail/${item.id }.html"><img src="${item.picture }"	style="height: 72px; width: 72px;" class="mr-3" alt="..."></a>
+							<div class="media-body">
+								<h5 class="mt-0 mb-1"><a href="/article/detail/${item.id }.html">${item.title }</a></h5>
+							</div></li>
+						</c:forEach>
+					</ul>
+				</div>
 				<!-- 点击量大于20成为热点文章 -->
 				<div class="right">
 					<div>热门推荐</div>

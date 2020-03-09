@@ -143,4 +143,15 @@ public interface ArticleService {
 	 * @return
 	 */
 	List<Article> getHotList(Integer pageSize);
+	/**
+	 * @Title: getNewList   
+	 * @Description: 查询指定条数的最新图片
+	 * @param: @param pageSize
+	 * @param: @return      
+	 * @return: List<ArticleService>      
+	 * @throws
+	 */
+	List<Article> getNewImage(Integer pageSize);
+	
+	
 }

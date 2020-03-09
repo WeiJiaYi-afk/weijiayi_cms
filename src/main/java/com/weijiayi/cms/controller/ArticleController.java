@@ -32,6 +32,27 @@ public class ArticleController {
 	private ArticleService articleService;
 	@Autowired
     private CollectService collectService;
+	
+	
+	/**
+	 * @Title: 图片上传  
+	 * @Description: 跳转到文章编辑页面
+	 * @param: @return      
+	 * @return: String      
+	 * @throws
+	 */
+	@GetMapping("/addImages")
+	public String AddImages(Integer id,Model model) {
+		List<Channel> channelList = articleService.getChannelAll();
+		model.addAttribute("channelList", channelList);
+		if(id!=null) {
+			Article article = articleService.getById(id);
+			List<Category> cateList = articleService.getCateListByChannelId(article.getChannel_id());
+			model.addAttribute("article", article);
+			model.addAttribute("cateList", cateList);
+		}
+		return "article/addImages";
+	}
 	/**
 	 * @Title: add   
 	 * @Description: 跳转到文章编辑页面

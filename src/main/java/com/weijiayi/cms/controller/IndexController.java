@@ -65,8 +65,12 @@ public class IndexController {
 		List<Channel> channelList = articleService.getChannelAll();
 		List<Slide> slideList = slideService.getAll();
 		PageInfo<Article> pageInfo = articleService.getHotList(pageNum,4);
+		//最新文章
 		List<Article> newArticleList = articleService.getNewList(6);
+		//最热文章
 		List<Article> srticleList = articleService.getHotList(20);
+		//最新图片
+		List<Article> newAritcleImage = articleService.getNewImage(pageNum);
 		//添加友情链接
 		List<Link> LinkList = linkService.selects();
 		model.addAttribute("LinkList", LinkList);
@@ -75,6 +79,7 @@ public class IndexController {
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("newArticleList", newArticleList);
 		model.addAttribute("ArticleList", srticleList);
+		model.addAttribute("newAritcleImage", newAritcleImage);
 		return "index";
 	}
 	
@@ -96,7 +101,10 @@ public class IndexController {
 		PageInfo<Article> pageInfo = articleService.getList(channelId,cateId,pageNum,2);
 		List<Category> cateList = articleService.getCateListByChannelId(channelId);
 		Channel channel = articleService.getChannelByChannelId(channelId);
+		//最新文章
 		List<Article> newArticleList = articleService.getNewList(6);
+		//最新图片
+		List<Article> newAritcleImage = articleService.getNewList(10);
 		//查最热文章
 		List<Article> srticleList = articleService.getHotList(20);
 		model.addAttribute("channelList", channelList);
@@ -106,6 +114,7 @@ public class IndexController {
 		model.addAttribute("channel", channel);
 		model.addAttribute("newArticleList", newArticleList);
 		model.addAttribute("ArticleList", srticleList);
+		model.addAttribute("newAritcleImage", newAritcleImage);
 		return "index";
 	}
 	/**
@@ -131,7 +140,9 @@ public class IndexController {
 		articleService.setHitsAndHot(id);
 		//查找相关文章
 		List<Article> newArticleList = articleService.selects(id);
+		List<Article> newAritcleImage = articleService.selects(id);
 		model.addAttribute("newArticleList", newArticleList);
+		model.addAttribute("newAritcleImage", newAritcleImage);
 		model.addAttribute("article", article);
 		model.addAttribute("user", user);
 		model.addAttribute("id",id);

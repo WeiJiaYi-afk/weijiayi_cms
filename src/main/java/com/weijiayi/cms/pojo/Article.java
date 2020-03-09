@@ -1,9 +1,14 @@
 package com.weijiayi.cms.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Article {
 
+	//内容类型字段
+	private Content contentt;
+	private List<Content> conlist;
+	
 	/** 所属栏目 **/
 	private String channel_name;
 	/** 所属分类 **/
@@ -53,7 +58,35 @@ public class Article {
 				+ ", updated=" + updated + ", commentCnt=" + commentCnt + ", tousuCnt=" + tousuCnt + "]";
 	}
 	
+
 	
+	
+	public List<Content> getConlist() {
+		return conlist;
+	}
+
+
+
+
+	public void setConlist(List<Content> conlist) {
+		this.conlist = conlist;
+	}
+
+
+
+
+	public Content getContentt() {
+		return contentt;
+	}
+
+
+
+	public void setContentt(Content contentt) {
+		this.contentt = contentt;
+	}
+
+
+
 	public String getChannel_name() {
 		return channel_name;
 	}
