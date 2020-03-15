@@ -26,10 +26,11 @@ KindEditor.ready(function(K) {});
 				<div class="nav flex-column nav-pills" aria-orientation="vertical">
 					<a class="nav-link active" href="javascript:;" url="/admin/user">用户管理</a>
 					<a class="nav-link" href="javascript:;" url="/admin/articles">文章管理</a> 
+					<a class="nav-link" href="javascript:;" url="/admin/link/links">友链管理</a> 
 				</div>
 			</div>
 			<div class="col-8" id="main">
-				<!-- 通过ajax异步加载 -->
+				
 				
 			</div>
 		</div>

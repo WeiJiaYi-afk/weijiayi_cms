@@ -12,10 +12,9 @@ import com.weijiayi.cms.common.CmsMd5Util;
 import com.weijiayi.cms.dao.UserDao;
 import com.weijiayi.cms.pojo.User;
 import com.weijiayi.cms.service.UserService;
-
+import com.weijiayi.common.utils.RandomUtil;
 @Service
 public class UserServiceImpl implements UserService{
-
 	@Autowired
 	private UserDao userDao;
 
@@ -58,7 +57,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public PageInfo<User> getPageInfo(User user, Integer pageNum, Integer pageSize) {
 		PageHelper.startPage(pageNum, pageSize);
-		List<User> userList = userDao.selects(user);
+		List<User> userList = userDao.select(user);
 		return new PageInfo<>(userList);
 	}
 
@@ -73,4 +72,11 @@ public class UserServiceImpl implements UserService{
 		return userDao.update(user)>0;
 	}
 
+	@Override
+	public Integer getRandomUserId() {
+		List<Integer> userIdList = userDao.selectIdList();
+		int random = RandomUtil.random(0, userIdList.size()-1);
+		return userIdList.get(random);
+	}
+	
 }

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.weijiayi.cms.dao.Vote_contentDao">
-	<select id="selects" resultType="VoteContent">
+<mapper namespace="com.weijiayi.cms.dao.VoteContentMapper">
+	<select id="select" resultType="VoteContent">
 		SELECT * FROM cms_vote_content
 
 	</select>

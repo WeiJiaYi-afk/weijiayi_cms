@@ -28,7 +28,6 @@
 							<li class="nav-item"><a class="nav-link"  href="/${item.id }/0/1.html">${item.name }</a></li>
 						</c:if>
 					</c:forEach>
-					
 				</ul>
 
 			</div>
@@ -40,7 +39,7 @@
 						<div class="carousel-inner">
 							<c:forEach items="${slideList }" var="item" varStatus="status">
 								<div class="carousel-item <c:if test="${status.index==0 }">active</c:if>">
-									<a href="${item.url }" target="_blank"><img src="${item.picture }" height="386px;" class="d-block w-100" alt="..."></a>
+									<a href="${item.url }" target="_blank"><img src="/pic/${item.picture }" height="386px;" class="d-block w-100" alt="..."></a>
 								</div>
 							</c:forEach>
 						</div>
@@ -87,6 +86,15 @@
 			<!-- 首页右侧 -->
 			<div class="col-3">
 				<div class="right">
+					<!--  搜索框 -->
+					<div class="card"
+						style="width: 18rem; margin-bottom: 5px; border: 0px;margin-top: 20px;margin-bottom: 20px;">
+						<div class="form-inline">
+							<input type="text" placeholder="请输入要搜索的内容" id="keyword" value="${keyword }" class="form-control"	style="width: 14rem; margin-right: 5px">
+							<button class="btn btn-info" type="button" onclick="search();">搜索</button>
+						</div>
+			
+					</div>
 					<div>最新文章</div>
 					<ul class="list-unstyled">
 						<c:forEach items="${newArticleList }" var="item">
@@ -99,32 +107,38 @@
 					</ul>
 				</div>
 				<div class="right">
-					<div>最新图片</div>
+					<div>最热文章</div>
 					<ul class="list-unstyled">
-						<c:forEach items="${newAritcleImage}" var="item">
-						<li class="media">
-							<a href="/article/detail/${item.id }.html"><img src="${item.picture }"	style="height: 72px; width: 72px;" class="mr-3" alt="..."></a>
+						<li class="media"><img
+							src="http://p1.pstatp.com/large/pgc-image/4ab237b9682f4c0286da5c5e6823dc87"
+							style="height: 72px; width: 72px;" class="mr-3" alt="...">
 							<div class="media-body">
-								<h5 class="mt-0 mb-1"><a href="/article/detail/${item.id }.html">${item.title }</a></h5>
+								<h5 class="mt-0 mb-1">电子眼全面升级，新增5项功能！</h5>
 							</div></li>
-						</c:forEach>
-					</ul>
-				</div>
-				<!-- 点击量大于20成为热点文章 -->
-				<div class="right">
-					<div>热门推荐</div>
-					<ul class="list-unstyled">
-						<c:forEach items="${ArticleList}" var="item">
-						<li class="media">
-							<a href="/article/detail/${item.id }.html"><img src="${item.picture }"	style="height: 72px; width: 72px;" class="mr-3" alt="..."></a>
+						<li class="media"><img
+							src="http://p1.pstatp.com/large/pgc-image/4ab237b9682f4c0286da5c5e6823dc87"
+							style="height: 72px; width: 72px;" class="mr-3" alt="...">
 							<div class="media-body">
-								<h5 class="mt-0 mb-1"><a href="/article/detail/${item.id }.html">${item.title }</a></h5>
+								<h5 class="mt-0 mb-1">电子眼全面升级，新增5项功能！</h5>
 							</div></li>
-						</c:forEach>
+						<li class="media"><img
+							src="http://p1.pstatp.com/large/pgc-image/4ab237b9682f4c0286da5c5e6823dc87"
+							style="height: 72px; width: 72px;" class="mr-3" alt="...">
+							<div class="media-body">
+								<h5 class="mt-0 mb-1">电子眼全面升级，新增5项功能！</h5>
+							</div></li>
 					</ul>
 				</div>
 			</div>
 
+		</div>
+		<div class="col-10 offset-1 breadcrumb" style="margin-bottom: 200px;">
+			友情链接：
+			<c:forEach items="${linkList }" var="item">
+				<div style="margin-left: 20px;">
+					<a href="${item.url }" target="_blank">${item.text }</a>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 	<script src="/public/js/jquery.min.1.12.4.js"></script>
@@ -139,6 +153,10 @@
 				location.href = '/'+channelId+'/'+cateId+'/'+pageNum+'.html';
 			}
 			
+		}
+		
+		function search() {
+			window.open("/search?keyword="+$("#keyword").val());
 		}
 	</script>
 </body>

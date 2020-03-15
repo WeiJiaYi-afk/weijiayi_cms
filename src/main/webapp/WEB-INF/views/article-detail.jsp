@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,81 +11,100 @@
 </head>
 <body>
 	<div class="header">
-		<jsp:include page="./common/user/head-top.jsp"></jsp:include>
+		<ul class="nav">
+			<li class="nav-item" style="margin-left: 12px;">
+				<a	class="navbar-brand" href="#"> 
+					<img src="https://v4.bootcss.com/docs/4.3/assets/brand/bootstrap-solid.svg"	width="30" height="30" alt="">
+				</a>
+			</li>
+			<li class="nav-item"><a class="nav-link active" href="/">首页</a>
+			</li>
+			<li class="nav-item"><a class="nav-link" href="#">个人中心</a></li>
+			<li class="nav-item"><a class="nav-link" href="#">登录</a></li>
+			<li class="nav-item"><a class="nav-link disabled" href="#"
+				tabindex="-1" aria-disabled="true">退出</a></li>
+		</ul>
 	</div>
 	<div class="container-fluid" style="margin-top: 6px;">
 		<div class="row offset-1">
 			<div class="col-6">
 				<h1>${article.title }</h1>
-				<!-- 隐藏id值 -->
-				<form id="fsd">
-					<input type="hidden" value="${us.id}" name="user_id">
-					<input type="hidden" value="${article.title}" name="text">
-				</form>
-				<h3 style="color: #777;"> 发布时间：<fmt:formatDate value="${article.created }" pattern="yyyy-MM-dd日"/></h3>
+				<h3 style="color: #777;">${article.nickname }    发布时间：<fmt:formatDate value="${article.created }" pattern="yyyy-MM-dd日"/></h3>
+				<div>
 					<div class="article-content">
 						${article.content }
-							<input type="button" value="收藏" onclick="sc()" class="btn btn-primary" id="fdd" >
-						
 					</div>
-				<div class="container-fluid" style="margin-top: 20px">
-					<form id="fid">
-					<c:if test="${userInfo==null}">
-						<span  ><a href="/user/login" style="color: red;">请登录后，发表评论</a></span>
-					</c:if>
-					<c:if test="${userInfo!=null}">
-					<input type="hidden" name="articleId" value="${article.id}" >
-					<input type="hidden" name="userId" value="${us.id}" >
-						 <textarea class="form-control" id="content" name="content" rows="1" placeholder="请输入评论" style="width: 300px;height: 60px" ></textarea>
-					 <button type="button" class="btn btn-primary" onclick="submitComment()">发布</button>
-					</c:if>
-					</form>
+				</div>
+				<form id="commentForm">
+				<c:if test="${userInfo==null }">
 					<div>
-					<c:forEach items="${info.list}" var="stu" >
-					<ul class="list-group list-group-flush">
-					<li class="list-group-item">${stu.cname}</t> ${stu.created} <br> ${stu.content}</li>
-					</ul>
+						<span><a href="/user/login">请登录后，发表评论</a></span>
+					</div>
+				</c:if>
+				<c:if test="${userInfo!=null }">
+					<div class="row" style="margin-top: 20px;">
+							<input type="hidden" id="articleId" name="articleId" value="${article.id }">
+							<div class="col-8 form-group">
+							    <!-- <label for="exampleFormControlTextarea1">评论</label> -->
+							    <textarea class="form-control" id="content" name="content" rows="1" placeholder="请输入评论"></textarea>
+							</div>
+							<div class="col-4">
+								<button type="button" class="btn btn-primary" onclick="submitComment();">发布</button>
+							</div>
+					</div>
+				</c:if>
+				<div>
+					<c:forEach items="${pageInfo.list }" var="item">
+						<div class="media">
+						  <img src="${item.headimg }" class="mr-3" alt="..." style="width: 32px;">
+						  <div class="media-body">
+						    <h5 class="mt-0">${item.nickname }  <fmt:formatDate value="${item.created }" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></h5>
+						     ${item.content }
+						  </div>
+						</div>
 					</c:forEach>
-					
+				</div>
+				<div>
+					<!-- <nav aria-label="Page navigation example">
+					  <ul class="pagination">
+					    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+					    <li class="page-item"><a class="page-link" href="#">1</a></li>
+					    <li class="page-item"><a class="page-link" href="#">2</a></li>
+					    <li class="page-item"><a class="page-link" href="#">3</a></li>
+					    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+					  </ul>
+					</nav> -->
+					<jsp:include page="./common/page.jsp"></jsp:include>
 				</div>
 				
+				</form>
 			</div>
-			<jsp:include page="pages.jsp"></jsp:include>
-		</div>
-		
+			
 			<div class="col-3">
 				<div class="right">
 					<div>相关文章</div>
 					<ul class="list-unstyled">
-						<c:forEach items="${newArticleList}" var="item">
-						<li class="media">
-							<a href="/article/detail/${item.id}.html"><img src="${item.picture }"	style="height: 72px; width: 72px;" class="mr-3" alt="..."></a>
-							<div class="media-body">
-								<h5 class="mt-0 mb-1"><a href="/article/detail/${item.id }.html">${item.title }</a></h5>
-							</div></li>
+						<c:forEach items="${relArticelList }" var="item">
+							<li class="media">
+								<a href="/article/detail/${item.id }.html" target="_blank"><img src="${item.picture }" style="height: 72px; width: 72px;" class="mr-3" alt="..."></a>
+								<div class="media-body">
+									<h5 class="mt-0 mb-1"><a href="/article/detail/${item.id }.html" target="_blank">${item.title }</a></h5>
+								</div>
+							</li>
 						</c:forEach>
 					</ul>
 				</div>
 			</div>
+
 		</div>
 	</div>
-	<nav aria-label="breadcrumb">
-		<ol class="breadcrumb"></ol>
-		<li>友情链接：</li>
-		<c:forEach items="${LinkList}" var="s">
-			<li>
-				<a href="${s.url}" style="margin-left:60px;">${s.text}</a>
-			</li>
-		</c:forEach>
-	</nav>
 	<script src="/public/js/jquery.min.1.12.4.js"></script>
 	<script src="/public/js/bootstrap.min.js"></script>
-</body>
 	<script type="text/javascript">
 		function submitComment(){
-			/* 把form表单提交 */
-			var forData = $("#fid").serialize();
-			$.post('/comment/add',forData,function(res){
+			var formData = $("#commentForm").serialize();
+			console.log(formData);
+			$.post('/comment/add',formData,function(res){
 				if(res.result){
 					console.log("评论成功");
 					var href = location.href;
@@ -98,32 +117,13 @@
 				}
 			})
 		}
-		function goPage(page){
-			var id = '${id}';
-			location.href="/article/detail/"+id+".html?page="+page;
-		}
-		//进行收藏文章
-		function sc(){
-			//如果session里面没有值就是没有登录，进行登录页面
-			if(${userInfo==null}){
-				alert("您没有登录，即将进行登录页面")
-				location.href="/user/login";
-			}
-			else{
-				//获取本路径的地址
-				var url = window.location.href;
-				var fsd =$("#fsd").serialize(); 
-				//type类型，路径，传值，成功回调函数
-				$.post('/collect/add?url='+url,fsd,function(msg){
-					if(msg>0){
-						alert("收藏成功");
-						$("#fdd").remove();
-					}else{
-						alert("您已经收藏了不能重复收藏");
-					}
-				})
-			}
-			
+		
+		function gotoPage(pageNo){
+			var href = location.href;
+			href = href.substring(0,href.indexOf('?'));
+			console.log(href);
+			location.href=href+'?pageNum='+pageNo;
 		}
 	</script>
+</body>
 </html>

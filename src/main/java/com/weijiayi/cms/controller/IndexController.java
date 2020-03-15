@@ -2,8 +2,6 @@ package com.weijiayi.cms.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.pagehelper.PageInfo;
-import com.weijiayi.cms.common.CmsConst;
 import com.weijiayi.cms.pojo.Article;
 import com.weijiayi.cms.pojo.Category;
 import com.weijiayi.cms.pojo.Channel;
@@ -38,6 +35,7 @@ public class IndexController {
 	private CommentService commentService;
 	@Autowired
 	private LinkService linkService;
+	
 	/**
 	 * @Title: index   
 	 * @Description: 首页   
@@ -62,24 +60,21 @@ public class IndexController {
 	 */
 	@RequestMapping("/hot/{pageNum}.html")
 	public String hot(Model model,@PathVariable Integer pageNum) {
+		/** 频道 **/
 		List<Channel> channelList = articleService.getChannelAll();
-		List<Slide> slideList = slideService.getAll();
-		PageInfo<Article> pageInfo = articleService.getHotList(pageNum,4);
-		//最新文章
-		List<Article> newArticleList = articleService.getNewList(6);
-		//最热文章
-		List<Article> srticleList = articleService.getHotList(20);
-		//最新图片
-		List<Article> newAritcleImage = articleService.getNewImage(pageNum);
-		//添加友情链接
-		List<Link> LinkList = linkService.selects();
-		model.addAttribute("LinkList", LinkList);
 		model.addAttribute("channelList", channelList);
+		/** 焦点图 **/
+		List<Slide> slideList = slideService.getAll();
 		model.addAttribute("slideList", slideList);
+		/** 热点文章 **/
+		PageInfo<Article> pageInfo = articleService.getHotListByCache(pageNum,4);
 		model.addAttribute("pageInfo", pageInfo);
+		/** 最新文章 **/
+		List<Article> newArticleList = articleService.getNewList(6);
 		model.addAttribute("newArticleList", newArticleList);
-		model.addAttribute("ArticleList", srticleList);
-		model.addAttribute("newAritcleImage", newAritcleImage);
+		/** 友情链接 **/
+		List<Link> linkList = linkService.getLinkListAll();
+		model.addAttribute("linkList", linkList);
 		return "index";
 	}
 	
@@ -98,23 +93,19 @@ public class IndexController {
 	public String channel(Model model,@PathVariable Integer channelId,@PathVariable Integer cateId,@PathVariable Integer pageNum) {
 		List<Channel> channelList = articleService.getChannelAll();
 		List<Slide> slideList = slideService.getAll();
-		PageInfo<Article> pageInfo = articleService.getList(channelId,cateId,pageNum,2);
+		PageInfo<Article> pageInfo = articleService.getList(channelId,cateId,pageNum,6);
 		List<Category> cateList = articleService.getCateListByChannelId(channelId);
 		Channel channel = articleService.getChannelByChannelId(channelId);
-		//最新文章
 		List<Article> newArticleList = articleService.getNewList(6);
-		//最新图片
-		List<Article> newAritcleImage = articleService.getNewList(10);
-		//查最热文章
-		List<Article> srticleList = articleService.getHotList(20);
 		model.addAttribute("channelList", channelList);
 		model.addAttribute("cateList", cateList);
 		model.addAttribute("slideList", slideList);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("channel", channel);
 		model.addAttribute("newArticleList", newArticleList);
-		model.addAttribute("ArticleList", srticleList);
-		model.addAttribute("newAritcleImage", newAritcleImage);
+		/** 友情链接 **/
+		List<Link> linkList = linkService.getLinkListAll();
+		model.addAttribute("linkList", linkList);
 		return "index";
 	}
 	/**
@@ -127,31 +118,20 @@ public class IndexController {
 	 * @throws
 	 */
 	@RequestMapping("/article/detail/{id}.html")
-	public String articleDetail(@PathVariable Integer id,Model model,@RequestParam(defaultValue = "1")Integer page,@RequestParam(defaultValue = "3")Integer pageSize,HttpSession session) {
+	public String articleDetail(@PathVariable Integer id,@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,Model model) {
 		Article article = articleService.getById(id);
-		System.out.println("文章详情页："+article);
 		User user = userService.getById(article.getUser_id());
-		System.out.println("文章详情页："+user);
 		article.setNickname(user.getNickname());
 		model.addAttribute("article", article);
-		//添加友情链接
-		List<Link> LinkList = linkService.selects();
+		/** 查询相关文章 **/
+		List<Article> relArticelList = articleService.getRelArticelList(article.getChannel_id(), article.getCategory_id(), article.getId(), 3);
+		model.addAttribute("relArticelList", relArticelList);
 		/** 设置文章点击量，若点击量大于20成为热点文章 **/
 		articleService.setHitsAndHot(id);
-		//查找相关文章
-		List<Article> newArticleList = articleService.selects(id);
-		List<Article> newAritcleImage = articleService.selects(id);
-		model.addAttribute("newArticleList", newArticleList);
-		model.addAttribute("newAritcleImage", newAritcleImage);
-		model.addAttribute("article", article);
-		model.addAttribute("user", user);
-		model.addAttribute("id",id);
-		model.addAttribute("LinkList",LinkList);
-		User us = (User) session.getAttribute(CmsConst.UserSessionKey);
-		model.addAttribute("us", us);
-		//进行添加评论
-		PageInfo<Comment> info = commentService.selectService(page,pageSize,id);
-		model.addAttribute("info", info);
+		/** 评论列表 **/
+		PageInfo<Comment> commentPageInfo = commentService.getPageInfo(article.getId(), pageNum, 10);
+		model.addAttribute("pageInfo", commentPageInfo);
 		return "article-detail";
 	}
+	
 }

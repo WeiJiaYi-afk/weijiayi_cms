@@ -10,6 +10,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 
+
 	<!-- 1、注解扫描器 -->
 	<context:component-scan base-package="com.weijiayi.cms" >
 		<!-- 排除要要扫描的controller -->
@@ -84,6 +85,9 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- basePackage :mapper接口所在的包 -->
 		<property name="basePackage" value="com.weijiayi.cms.dao"></property>
-
 	</bean>
+	<import resource="redis.xml"/>
+	<import resource="elasticsearch.xml"/>
+	<import resource="kafka-producer.xml"/>
+	<import resource="kafka-consumer.xml"/>
 </beans>

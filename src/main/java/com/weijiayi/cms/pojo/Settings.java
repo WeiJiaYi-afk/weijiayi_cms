@@ -1,7 +1,6 @@
 package com.weijiayi.cms.pojo;
 
 public class Settings {
-
 	/**  **/
 	private Integer id;
 	/** 网站域名 **/
@@ -16,14 +15,6 @@ public class Settings {
 	private String admin_username;
 	/** 管理员密码 **/
 	private String admin_password;
-	
-	@Override
-	public String toString() {
-		return "Settings [id=" + id + ", site_domain=" + site_domain + ", site_name=" + site_name
-				+ ", article_list_size=" + article_list_size + ", slide_size=" + slide_size + ", admin_username="
-				+ admin_username + ", admin_password=" + admin_password + "]";
-	}
-	
 	public Integer getId() {
 		return id;
 	}
@@ -66,5 +57,12 @@ public class Settings {
 	public void setAdmin_password(String admin_password) {
 		this.admin_password = admin_password;
 	}
+	@Override
+	public String toString() {
+		return "Settings [id=" + id + ", site_domain=" + site_domain + ", site_name=" + site_name
+				+ ", article_list_size=" + article_list_size + ", slide_size=" + slide_size + ", admin_username="
+				+ admin_username + ", admin_password=" + admin_password + "]";
+	}
+
 	
 }

@@ -3,8 +3,8 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
      
-<mapper namespace="com.weijiayi.cms.dao.CategoryDao">
-	<select id="selects" resultType="Category">
+<mapper namespace="com.weijiayi.cms.dao.CateGoryMapper">
+	<select id="select" resultType="Category">
 		SELECT * FROM cms_category
 		<where>
 			<if test="channel_id!=null and channel_id!=''">

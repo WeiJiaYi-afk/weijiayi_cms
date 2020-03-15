@@ -1,13 +1,17 @@
 package com.weijiayi.cms.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-public class Article {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
-	//内容类型字段
-	private Content contentt;
-	private List<Content> conlist;
+@Document(indexName="wjy",type="article")
+public class Article implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	/** 所属栏目 **/
 	private String channel_name;
@@ -19,74 +23,78 @@ public class Article {
 	private String statusStr;
 	
 	
-	/**  **/
+	@Id
+	@Field(store=true,index=false,type=FieldType.Integer)
 	private Integer id;
 	/** 标题 **/
+	@Field(store=true,index=true,type=FieldType.Text,analyzer="ik_smart",searchAnalyzer="ik_smart")
 	private String title;
 	/** 文章内容 **/
+	@Field(store=true,index=true,type=FieldType.Text,analyzer="ik_smart",searchAnalyzer="ik_smart")
 	private String content;
 	/** 标题图片 **/
+	@Field(store=true,index=false,type=FieldType.Text)
 	private String picture;
 	/** 所属栏目 **/
+	@Field(store=true,index=false,type=FieldType.Integer)
 	private Integer channel_id;
 	/** 所属分类 **/
+	@Field(store=true,index=false,type=FieldType.Integer)
 	private Integer category_id;
 	/** 用户Id **/
+	@Field(store=true,index=false,type=FieldType.Integer)
 	private Integer user_id;
 	/** 点击次数 **/
+	@Field(store=true,index=false,type=FieldType.Integer)
 	private Integer hits;
 	/** 是否热门 **/
+	@Field(store=true,index=false,type=FieldType.Integer)
 	private Integer hot;
 	/** 0：刚发布；2：草稿；1审核通过；-1 审核未通过;3:禁用 **/
+	@Field(store=true,index=false,type=FieldType.Integer)
 	private Integer status;
 	/** 0:正常,1:删除 **/
+	@Field(store=true,index=false,type=FieldType.Integer)
 	private Integer deleted;
 	/** 发布时间 **/
+
+    @Field(store=true,index=false,type=FieldType.Date)
 	private Date created;
 	/** 更新时间 **/
+    @Field(store=true,index=false,type=FieldType.Date)
 	private Date updated;
 	/** 评论数量 **/
+	@Field(store=true,index=false,type=FieldType.Integer)
 	private Integer commentCnt;
 	/** 投诉次数 **/
+	@Field(store=true,index=false,type=FieldType.Integer)
 	private Integer tousuCnt;
 	
-	@Override
-	public String toString() {
-		return "Article [id=" + id + ", title=" + title + ", content=" + content + ", picture=" + picture
-				+ ", channel_id=" + channel_id + ", category_id=" + category_id + ", user_id=" + user_id + ", hits="
-				+ hits + ", hot=" + hot + ", status=" + status + ", deleted=" + deleted + ", created=" + created
-				+ ", updated=" + updated + ", commentCnt=" + commentCnt + ", tousuCnt=" + tousuCnt + "]";
-	}
 	
-
-	
-	
-	public List<Content> getConlist() {
-		return conlist;
+	public String getNickname() {
+		return nickname;
 	}
-
-
-
-
-	public void setConlist(List<Content> conlist) {
-		this.conlist = conlist;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
-
-
-
-
-	public Content getContentt() {
-		return contentt;
+	public Integer getId() {
+		return id;
 	}
-
-
-
-	public void setContentt(Content contentt) {
-		this.contentt = contentt;
+	public void setId(Integer id) {
+		this.id = id;
 	}
-
-
-
+	public String getTitle() {
+		return title;
+	}
+	public String getStatusStr() {
+		return statusStr;
+	}
+	public void setStatusStr(String statusStr) {
+		this.statusStr = statusStr;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getChannel_name() {
 		return channel_name;
 	}
@@ -98,30 +106,6 @@ public class Article {
 	}
 	public void setCategory_name(String category_name) {
 		this.category_name = category_name;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getStatusStr() {
-		return statusStr;
-	}
-	public void setStatusStr(String statusStr) {
-		this.statusStr = statusStr;
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
 	}
 	public String getContent() {
 		return content;
@@ -177,6 +161,7 @@ public class Article {
 	public void setDeleted(Integer deleted) {
 		this.deleted = deleted;
 	}
+	
 	public Date getCreated() {
 		return created;
 	}
@@ -201,7 +186,14 @@ public class Article {
 	public void setTousuCnt(Integer tousuCnt) {
 		this.tousuCnt = tousuCnt;
 	}
+	@Override
+	public String toString() {
+		return "Article [id=" + id + ", title=" + title + ", content=" + content + ", picture=" + picture
+				+ ", channel_id=" + channel_id + ", category_id=" + category_id + ", user_id=" + user_id + ", hits="
+				+ hits + ", hot=" + hot + ", status=" + status + ", deleted=" + deleted + ", created=" + created
+				+ ", updated=" + updated + ", commentCnt=" + commentCnt + ", tousuCnt=" + tousuCnt + "]";
+	}
 	
-	
+
 	
 }

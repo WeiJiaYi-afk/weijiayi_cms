@@ -3,15 +3,18 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.weijiayi.cms.dao.ArticleDao">
+<mapper namespace="com.weijiayi.cms.dao.ArticleMapper">
 
-	<select id="selects" resultType="article">
+	<select id="select" resultType="article">
 		SELECT * FROM cms_article where deleted=0
 		<if test="title!=null and title!=''">
 			and title like '%${title}%'
 		</if>
 		<if test="hot!=null and hot!=''">
 			and hot=#{hot}
+		</if>
+		<if test="id!=null and id!=''">
+			and id!=#{id}
 		</if>
 		<if test="status!=null and status!=''">
 			and status=#{status}

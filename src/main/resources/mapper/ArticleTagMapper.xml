@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.weijiayi.cms.dao.Article_tagDao">
-	<select id="selects" resultType="articleTag">
+<mapper namespace="com.weijiayi.cms.dao.ArticleTageMapper">
+	<select id="select" resultType="articleTag">
 		SELECT * FROM cms_article_tag
 
 	</select>

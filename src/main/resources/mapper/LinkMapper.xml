@@ -2,9 +2,14 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.weijiayi.cms.dao.LinkDao">
-	<select id="selects" resultType="Link">
+<mapper namespace="com.weijiayi.cms.dao.LinkMapper">
+	<select id="select" resultType="Link">
 		SELECT * FROM cms_link
+		<where>
+			<if test="text!=null and text!=''">
+				`text` like '%${text}%'
+			</if>
+		</where>
 	</select>
 
 	<select id="selectById" resultType="Link">

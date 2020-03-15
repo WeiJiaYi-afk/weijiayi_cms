@@ -97,7 +97,7 @@
 					$("#category_id").append('<option value="'+value.id+'">'+value.name+'</option>');
 				})
 			}
-			
+			//
 		})
 	}
 	

@@ -3,12 +3,13 @@ package com.weijiayi.cms.pojo;
 import java.util.Date;
 
 public class User {
-	
-/** ----------------扩展属性----------------- **/
+	/** ----------------扩展属性----------------- **/
 	
 	/** 扩展属性 **/
 	private String rePassword;
-
+	
+	/** ----------------数据字段----------------- **/
+	/**  **/
 	private Integer id;
 	/** 登录名称 **/
 	private String username;
@@ -35,16 +36,13 @@ public class User {
 	/** 修改时间 **/
 	private Date update_time;
 	
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", headimg=" + headimg + ", password=" + password
-				+ ", nickname=" + nickname + ", birthday=" + birthday + ", gender=" + gender + ", locked=" + locked
-				+ ", score=" + score + ", role=" + role + ", url=" + url + ", create_time=" + create_time
-				+ ", update_time=" + update_time + "]";
-	}
 	
-
-
+	public String getRePassword() {
+		return rePassword;
+	}
+	public void setRePassword(String rePassword) {
+		this.rePassword = rePassword;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -111,6 +109,7 @@ public class User {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
 	public Date getCreate_time() {
 		return create_time;
 	}
@@ -123,11 +122,14 @@ public class User {
 	public void setUpdate_time(Date update_time) {
 		this.update_time = update_time;
 	}
-	public String getRePassword() {
-		return rePassword;
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", headimg=" + headimg + ", password=" + password
+				+ ", nickname=" + nickname + ", birthday=" + birthday + ", gender=" + gender + ", locked=" + locked
+				+ ", score=" + score + ", role=" + role + ", url=" + url + ", create_time=" + create_time
+				+ ", update_time=" + update_time + "]";
 	}
-	public void setRePassword(String rePassword) {
-		this.rePassword = rePassword;
-	}
+	
+
 	
 }

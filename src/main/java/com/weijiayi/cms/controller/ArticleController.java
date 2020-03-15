@@ -19,40 +19,15 @@ import com.weijiayi.cms.common.JsonResult;
 import com.weijiayi.cms.pojo.Article;
 import com.weijiayi.cms.pojo.Category;
 import com.weijiayi.cms.pojo.Channel;
-import com.weijiayi.cms.pojo.Collect;
 import com.weijiayi.cms.pojo.User;
 import com.weijiayi.cms.service.ArticleService;
-import com.weijiayi.cms.service.CollectService;
-
 
 @Controller
 @RequestMapping("/article/")
 public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
-	@Autowired
-    private CollectService collectService;
 	
-	
-	/**
-	 * @Title: 图片上传  
-	 * @Description: 跳转到文章编辑页面
-	 * @param: @return      
-	 * @return: String      
-	 * @throws
-	 */
-	@GetMapping("/addImages")
-	public String AddImages(Integer id,Model model) {
-		List<Channel> channelList = articleService.getChannelAll();
-		model.addAttribute("channelList", channelList);
-		if(id!=null) {
-			Article article = articleService.getById(id);
-			List<Category> cateList = articleService.getCateListByChannelId(article.getChannel_id());
-			model.addAttribute("article", article);
-			model.addAttribute("cateList", cateList);
-		}
-		return "article/addImages";
-	}
 	/**
 	 * @Title: add   
 	 * @Description: 跳转到文章编辑页面
@@ -130,15 +105,5 @@ public class ArticleController {
 	public @ResponseBody JsonResult deleteByIds(String ids) {
 		articleService.deleteByIds(ids);
 		return JsonResult.sucess();
-	}
-	//查找收藏文件
-	@RequestMapping("/cellects")
-	public String cellectSelect(Model model,@RequestParam(defaultValue = "1")Integer page,@RequestParam(defaultValue = "4")Integer PageSize,HttpSession session) {
-		User user = (User) session.getAttribute(CmsConst.UserSessionKey);
-		PageInfo<Collect> info =  collectService.selectCellects(user.getId(),page,PageSize);
-		
-		model.addAttribute("info",info);
-		return "article/cellects";
-		
 	}
 }

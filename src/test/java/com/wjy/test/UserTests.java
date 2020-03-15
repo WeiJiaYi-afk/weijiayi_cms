@@ -1,61 +1,43 @@
 package com.wjy.test;
 
-import java.util.Date;
 import java.util.List;
-
-import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.weijiayi.cms.dao.ArticleDao;
+import com.weijiayi.cms.dao.ChannelDao;
 import com.weijiayi.cms.dao.UserDao;
 import com.weijiayi.cms.pojo.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring-beans.xml")
+@ContextConfiguration(locations="classpath:spring-beans.xml")
 public class UserTests {
-
-	@Resource
+	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private ArticleDao articleDao;
+	@Autowired
+	private ChannelDao channelDao;
 	
 	@Test
 	public void test() {
-		//查询
-		List<User> userList = userDao.selects(null);
+		List<User> userList = userDao.select(null);
 		System.out.println(userList);
+		channelDao.select(null);
 		
-		//列表展示
-		List<User> selects = userDao.selects(new User());
-		for (User user : selects) {
-			System.out.println(user);
-		}
-		
-		
-		//根据id查询
-		User selectById = userDao.selectById(201);
-		System.out.println(selectById);
-		
-		//添加
-		Date date = new Date();
 		User user = new User();
-		user.setUsername("wjy");
-		user.setPassword("666");
-		user.setNickname("Wjy");
+		user.setNickname("lisi");
 //		userDao.insert(user);
-				
-		//修改
-		User u1 = new User();
-		u1.setId(198);
-		u1.setUsername("wjyy");
-		u1.setPassword("6666");
-		u1.setNickname("WjyW");
-//		userDao.update(u1);
+		user.setId(200);
+//		userDao.update(user);
 		
-		//删除
-		userDao.delete("201");
+//		userDao.delete("200");
 		
+		User selectById = userDao.selectById(199);
+		System.out.println(selectById);
 	}
-	
 }

@@ -13,10 +13,9 @@ import com.weijiayi.cms.service.SlideService;
 public class SlideServiceImpl implements SlideService{
 	@Autowired
 	private SlideDao slideDao;
-
 	@Override
 	public List<Slide> getAll() {
-		return slideDao.selects(null);
+		return slideDao.select(null);
 	}
-	
+
 }

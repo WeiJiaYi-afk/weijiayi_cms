@@ -23,26 +23,26 @@
 
 <script type="text/javascript">
 	
-function save(){
-	var nickname = $("#nickname").val();
-	var headimg = $("#headimg").val();
-	if(nickname==null || nickname==""){
-		$(".alert").html("昵称不能为空");
-		$(".alert").show();
-		return;
-	}
-	if(headimg==null || headimg==""){
-		$(".alert").html("头像不能为空");
-		$(".alert").show();
-		return;
-	}
-	$(".alert").hide();
-	$.post("/user/set",$("#saveForm").serialize(),function(res){
-		if(res.result){
-			$(".alert").html("设置成功");
+	function save(){
+		var nickname = $("#nickname").val();
+		var headimg = $("#headimg").val();
+		if(nickname==null || nickname==""){
+			$(".alert").html("昵称不能为空");
 			$(".alert").show();
+			return;
 		}
-	})
-	
-}
+		if(headimg==null || headimg==""){
+			$(".alert").html("头像不能为空");
+			$(".alert").show();
+			return;
+		}
+		$(".alert").hide();
+		$.post("/user/set",$("#saveForm").serialize(),function(res){
+			if(res.result){
+				$(".alert").html("设置成功");
+				$(".alert").show();
+			}
+		})
+		
+	}
 </script>

@@ -3,7 +3,6 @@ package com.weijiayi.cms.pojo;
 import java.util.Date;
 
 public class Link {
-
 	/**  **/
 	private Integer id;
 	/**  **/
@@ -12,12 +11,6 @@ public class Link {
 	private String url;
 	/**  **/
 	private Date created;
-	
-	@Override
-	public String toString() {
-		return "Link [id=" + id + ", text=" + text + ", url=" + url + "]";
-	}
-	
 	public Integer getId() {
 		return id;
 	}
@@ -36,12 +29,17 @@ public class Link {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
 	public Date getCreated() {
 		return created;
 	}
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-
+	@Override
+	public String toString() {
+		return "Link [id=" + id + ", text=" + text + ", url=" + url + ", created=" + created + "]";
+	}
 	
+
 }

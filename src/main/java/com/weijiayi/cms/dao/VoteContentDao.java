@@ -1,7 +1,7 @@
 package com.weijiayi.cms.dao;
 
-import com.weijiayi.cms.pojo.Votecontent;
+import com.weijiayi.cms.pojo.VoteContent;
 
-public interface VoteContentDao extends BaseDao<Votecontent>{
+public interface VoteContentDao extends BaseDao<VoteContent>{
 
 }

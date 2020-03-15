@@ -1,7 +1,6 @@
 package com.weijiayi.cms.pojo;
 
 public class ArticleVote {
-
 	/**  **/
 	private Integer id;
 	/** 文章Id **/
@@ -10,14 +9,6 @@ public class ArticleVote {
 	private Integer user_id;
 	/** 选项 **/
 	private String option;
-	
-	@Override
-	public String toString() {
-		return "Article_vote [id=" + id + ", article_id=" + article_id + ", user_id=" + user_id + ", option=" + option
-				+ "]";
-	}
-	
-
 	public Integer getId() {
 		return id;
 	}
@@ -41,6 +32,11 @@ public class ArticleVote {
 	}
 	public void setOption(String option) {
 		this.option = option;
+	}
+	@Override
+	public String toString() {
+		return "Article_vote [id=" + id + ", article_id=" + article_id + ", user_id=" + user_id + ", option=" + option
+				+ "]";
 	}
 
 	

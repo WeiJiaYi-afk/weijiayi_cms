@@ -25,7 +25,6 @@ import com.weijiayi.common.utils.StringUtil;
 @Controller
 @RequestMapping("/admin/")
 public class AdminController {
-
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -102,7 +101,7 @@ public class AdminController {
 	
 	@RequestMapping("/updateLocked")
 	public @ResponseBody JsonResult updateLocked(User user) {
-		boolean result = userService.updateLocked(user.getId());
+		userService.updateLocked(user.getId());
 		return JsonResult.sucess();
 	}
 	

@@ -24,19 +24,20 @@ $(".imgDive").mouseleave(function () {
 });
 
 $("#fileName").on("change",function(){
-	console.log(this.files[0]);
-	var formData = new FormData();
-	formData.append("file",this.files[0]);
-	$.ajax({
-		url:"/file/upload",
-		type:"post",
-		data:formData,
-		processData:false,
-		contentType:false,
-		success: function(res){
-			$("#viewImg").attr("src",res.url);
-			$("#<%=fieldName %>").val(res.url);
-		}
-	});
-})
+		console.log(this.files[0]);
+		var formData = new FormData();
+		formData.append("file",this.files[0]);
+		$.ajax({
+			url:"/file/upload",
+			type:"post",
+			data:formData,
+			processData:false,
+			contentType:false,
+			success: function(res){
+				console.log(res);
+				$("#viewImg").attr("src",res.url);
+				$("#<%=fieldName %>").val(res.url);
+			}
+		});
+	})
 </script>

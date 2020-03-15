@@ -3,8 +3,6 @@ package com.weijiayi.cms.service;
 import java.util.List;
 
 import com.github.pagehelper.PageInfo;
-import com.weijiayi.cms.dao.CategoryDao;
-import com.weijiayi.cms.dao.ChannelDao;
 import com.weijiayi.cms.pojo.Article;
 import com.weijiayi.cms.pojo.Category;
 import com.weijiayi.cms.pojo.Channel;
@@ -131,27 +129,53 @@ public interface ArticleService {
 	 * @throws
 	 */
 	List<Article> getNewList(Integer pageSize);
+	
 	/**
-	 * 查找相关文章
-	 * @param id
-	 * @return
-	 */
-	List<Article> selects(Integer id);
-	/**
-	 * 查找最热文章
-	 * @param i
-	 * @return
-	 */
-	List<Article> getHotList(Integer pageSize);
-	/**
-	 * @Title: getNewList   
-	 * @Description: 查询指定条数的最新图片
+	 * @Title: getList   
+	 * @Description: 根据频道Id和分类Id查询文章，且文章id不能等于articleId   
+	 * @param: @param channelId
+	 * @param: @param cateId
+	 * @param: @param articleId
 	 * @param: @param pageSize
 	 * @param: @return      
-	 * @return: List<ArticleService>      
+	 * @return: List<Article>      
 	 * @throws
 	 */
-	List<Article> getNewImage(Integer pageSize);
+	List<Article> getRelArticelList(Integer channelId,Integer cateId,Integer articleId,Integer pageSize);
+	/**
+	 * @Title: updateCommentCnt   
+	 * @Description: 修改文章的评论数量   
+	 * @param: @param id
+	 * @param: @return      
+	 * @return: boolean      
+	 * @throws
+	 */
+	boolean updateCommentCnt(Integer id);
+	/**
+	 * @Title: getRandomArticleId   
+	 * @Description: 获取随机文章Id   
+	 * @param: @return      
+	 * @return: Integer      
+	 * @throws
+	 */
+	Integer getRandomArticleId();
+	/**
+	 * 带缓存的热点文章
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
+	PageInfo<Article> getHotListByCache(int pageNum, int pageSize);
 	
-	
+	/**
+	 * 获取随机频道Id
+	 * @return
+	 */
+	Integer getRandomChannelId();
+	/**
+	 * 随机指定频道下的分类Id
+	 * @param channelId
+	 * @return
+	 */
+	Integer getRandomCateId(Integer channelId);
 }

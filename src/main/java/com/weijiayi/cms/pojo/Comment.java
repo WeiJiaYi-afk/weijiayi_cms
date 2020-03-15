@@ -1,7 +1,18 @@
 package com.weijiayi.cms.pojo;
 
-public class Comment {
+import java.io.Serializable;
+import java.util.Date;
+import java.util.HashSet;
 
+public class Comment implements Serializable{
+	/**   
+	 * @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)   
+	 */
+	private static final long serialVersionUID = 1L;
+	/** 用户昵称 **/
+	private String nickname;
+	private String headimg;
+	
 	/**  **/
 	private Integer id;
 	/** 文章Id **/
@@ -11,28 +22,21 @@ public class Comment {
 	/** 评论内容 **/
 	private String content;
 	/** 评论时间 **/
-	private String created;
-	//用户姓名
-	private String cname;
+	private Date created;
 	
-	@Override
-	public String toString() {
-		return "Comment [id=" + id + ", articleId=" + articleId + ", userId=" + userId + ", content=" + content
-				+ ", created=" + created + "]";
-	}
 	
-	public Comment() {
-		// TODO Auto-generated constructor stub
+	public String getHeadimg() {
+		return headimg;
 	}
-	public String getCname() {
-		return cname;
+	public void setHeadimg(String headimg) {
+		this.headimg = headimg;
 	}
-
-	public void setCname(String cname) {
-		this.cname = cname;
+	public String getNickname() {
+		return nickname;
 	}
-
-
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -57,13 +61,56 @@ public class Comment {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getCreated() {
+	
+	public Date getCreated() {
 		return created;
 	}
-	public void setCreated(String created) {
+	public void setCreated(Date created) {
 		this.created = created;
 	}
-
-
+	@Override
+	public String toString() {
+		return "Comment [nickname=" + nickname + ", headimg=" + headimg + ", id=" + id + ", articleId=" + articleId
+				+ ", userId=" + userId + ", content=" + content + ", created=" + created + "]";
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Comment other = (Comment) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	
+	
+	public static void main(String[] args) {
+		Comment comment = new Comment();
+		comment.setId(1);
+		Comment comment2 = new Comment();
+		comment2.setId(1);
+		System.out.println(comment.equals(comment2));
+		
+		java.util.Set<Comment> set = new HashSet<>();
+		set.add(comment);
+		set.add(comment2);
+		System.out.println(set);
+	}
+	
 	
 }

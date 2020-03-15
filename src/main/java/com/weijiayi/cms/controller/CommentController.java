@@ -1,10 +1,8 @@
 package com.weijiayi.cms.controller;
 
-import java.util.Date;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,35 +13,30 @@ import com.weijiayi.cms.pojo.Comment;
 import com.weijiayi.cms.pojo.User;
 import com.weijiayi.cms.service.CommentService;
 
-
 @Controller
 @RequestMapping("/comment/")
 public class CommentController {
-
-	@Resource
+	@Autowired
 	private CommentService commentService;
+	
 	/**
-	 * @param comment
-	 * @return
+	 * @Title: add   
+	 * @Description: 添加评论  
+	 * @param: @param comment
+	 * @param: @param session
+	 * @param: @return      
+	 * @return: JsonResult      
+	 * @throws
 	 */
 	@RequestMapping("add")
-	@ResponseBody
-	public JsonResult show(Comment comment,HttpSession session) {
-		//后端验证是否登陆
-		User user = (User) session.getAttribute(CmsConst.UserSessionKey);
-		if(user==null) {
-			return JsonResult.fail(10000,"用户未登录");
+	public @ResponseBody JsonResult add(Comment comment,HttpSession session) {
+		User userInfo = (User)session.getAttribute(CmsConst.UserSessionKey);
+		if(userInfo==null) {
+			return JsonResult.fail(10000, "用户未登录");
 		}
-		else {
-			Date date = new Date();
-			String localeString = date.toLocaleString();
-			comment.setCreated(localeString);
-			System.out.println(comment);
-			commentService.addComment(comment);
-			//返回成功集
-			return JsonResult.sucess();
-		}
-		
-		
+		comment.setUserId(userInfo.getId());
+		commentService.add(comment);
+		return JsonResult.sucess();
 	}
+
 }

@@ -19,11 +19,9 @@ import com.weijiayi.cms.pojo.User;
 import com.weijiayi.cms.service.UserService;
 import com.weijiayi.common.utils.StringUtil;
 
-
 @Controller
 @RequestMapping("/user/")
 public class UserController {
-
 	@Autowired
 	private UserService userService;
 	/**
@@ -157,4 +155,5 @@ public class UserController {
 		userService.set(user);
 		return JsonResult.sucess();
 	}
+	
 }

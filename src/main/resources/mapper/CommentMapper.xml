@@ -2,10 +2,15 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.weijiayi.cms.dao.CommentDao">
-	<select id="selects" resultType="Comment">
+<mapper namespace="com.weijiayi.cms.dao.CommentMapper">
+	<select id="select" resultType="Comment">
 		SELECT * FROM cms_comment
-
+		<where>
+			<if test="articleId!=null">
+				articleId=#{articleId}
+			</if>
+		</where>
+	    order by id desc
 	</select>
 
 	<select id="selectById" resultType="Comment">
